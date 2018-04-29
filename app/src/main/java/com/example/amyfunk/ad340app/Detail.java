@@ -3,6 +3,7 @@ package com.example.amyfunk.ad340app;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +31,12 @@ public class Detail extends AppCompatActivity {
         String zmDirector = intent.getStringExtra(DIRECTOR);
         String zmImage = intent.getStringExtra(IMAGE);
         String zmDescription = intent.getStringExtra(DESCRIPTION);
+
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        myToolbar.setTitle(zmTitle);
+        setSupportActionBar(myToolbar);
+
+
 
 
         TextView title = findViewById(R.id.title);

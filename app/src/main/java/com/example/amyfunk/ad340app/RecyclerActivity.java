@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -46,6 +47,11 @@ public class RecyclerActivity extends AppCompatActivity implements Adapter.OnIte
 
         recyclerViewLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(recyclerViewLayoutManager);
+
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        myToolbar.setTitle("Zombie Movies");
+        setSupportActionBar(myToolbar);
+
 
 
         queue = Volley.newRequestQueue(this);

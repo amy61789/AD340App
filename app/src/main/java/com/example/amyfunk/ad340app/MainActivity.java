@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         GridView gridview = findViewById(R.id.gridview);
         gridview.setAdapter(new ButtonAdapter(this));
+
+        Toolbar myToolbar = findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
     }
 
 
