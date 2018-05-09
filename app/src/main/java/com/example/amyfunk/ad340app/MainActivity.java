@@ -2,13 +2,17 @@ package com.example.amyfunk.ad340app;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,14 +20,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    public static final String EXTRA_MESSAGE = "com.example.myapplication.MESSAGE";
     private static final String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
 
-    String[] arr = {"Zombie", "About", "not this one", "null"};
+    String[] arr = {"Zombie", "About", "not this one", "stapphhhh"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +45,34 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionbar = getSupportActionBar();
         actionbar.setDisplayHomeAsUpEnabled(true);
         actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+        final SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        EditText editText = findViewById(R.id.editText);
+        final Button button = findViewById(R.id.button);
+        editText.setText(prefs.getString("autoSave", ""));
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                if(s.toString().trim().length()==0){
+                    button.setEnabled(false);
+                }else{
+                    button.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                prefs.edit().putString("autoSave", s.toString()).commit();
+            }
+        });
+
 
         // handle navigation drawer events
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -66,6 +100,23 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+
+    public void sendMessage(View view) {
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        EditText editText = findViewById(R.id.editText);
+        String message = editText.getText().toString();
+        Log.d(TAG, "info button " + message);
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public boolean inputIsValid(String str) {
+        if (str.length() == 0) {
+            return false;
+        }
+        return true;
+    }
 
     public class ButtonAdapter extends BaseAdapter {
         private Context context;

@@ -7,4 +7,6 @@
     <string name="textViewAbout">This is my about page for my Android app. This project also contains a zombie movie recycler and detail page.</string>
     <string name="action_about">action_about</string>
     <string name="action_settings">action_settings</string>
+    <string name="button_info">message</string>
+    <string name="saved_text_entry">text_entry</string>
 </resources>
