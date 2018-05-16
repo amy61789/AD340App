@@ -19,7 +19,7 @@ public class About extends AppCompatActivity {
         myToolbar.setTitle("About");
         setSupportActionBar(myToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         myToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

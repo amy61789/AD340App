@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
 
-    String[] arr = {"Zombie", "About", "not this one", "stapphhhh"};
+    String[] arr = {"Zombie", "About", "Traffic Cameras", "stapphhhh"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,6 +191,10 @@ public class MainActivity extends AppCompatActivity {
 
                 case 1:
                     intent = new Intent(getBaseContext(), About.class);
+                    startActivity(intent);
+                    break;
+                case 2:
+                    intent = new Intent(getBaseContext(), Cameras.class);
                     startActivity(intent);
                     break;
                 default:

@@ -9,4 +9,5 @@
     <string name="action_settings">action_settings</string>
     <string name="button_info">message</string>
     <string name="saved_text_entry">text_entry</string>
+    <string name="title_activity_recycler_web">Seattle Traffic Cameras</string>
 </resources>
