@@ -4,9 +4,9 @@ public class TrafficCam {
     private String description;
     private String imageUrl;
     private String type;
-    private Double[] coords;
+    private double[] coords;
 
-    public TrafficCam(String description, String imageUrl, String type, Double[] coords){
+    public TrafficCam(String description, String imageUrl, String type, double[] coords){
 
         this.description = description;
         this.imageUrl = imageUrl;
@@ -26,7 +26,7 @@ public class TrafficCam {
         return type;
     }
 
-    public Double[] getCoords() {
+    public double[] getCoords() {
         return coords;
     }
 }
