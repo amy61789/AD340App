@@ -61,7 +61,7 @@ public class Detail extends AppCompatActivity {
         TextView description = findViewById(R.id.description);
 
         //set the values to each item in the model
-        Picasso.with(this).load(zmImage).fit().into(image);
+        Picasso.get().load(zmImage).fit().into(image);
         title.setText(zmTitle);
         year.setText("In " + zmYear);
         director.setText(zmDirector);
