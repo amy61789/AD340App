@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 27
@@ -43,10 +44,20 @@ dependencies {
     implementation 'com.android.support:cardview-v7:27.1.0'
     implementation 'com.android.support:appcompat-v7:27.1.0'
     implementation 'com.android.support:design:27.1.0'
+
+    implementation 'com.google.android.gms:play-services-maps:15.0.1'
+    implementation 'com.google.android.gms:play-services-location:15.0.1'
+    implementation 'com.google.android.gms:play-services:+'
+
     androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+}
+repositories {
+    mavenCentral()
 }
