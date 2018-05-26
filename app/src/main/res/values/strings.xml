@@ -17,6 +17,7 @@
     <string name="label_latitude">Latitude</string>
     <string name="no_location_data">No Location Data</string>
     <string name="service_not_available">Service unavailable</string>
+    <string name="no_geocoder_available">No Geocoder available</string>
     <string name="address_found">Address found</string>
     <string name="no_address_found">No address found</string>
     <string name="invalid_lat_long_used">Invalid Lat/Long</string>

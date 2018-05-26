@@ -3,8 +3,13 @@ package com.example.amyfunk.ad340app;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,12 +29,17 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
     public static final String EXTRA_MESSAGE = "com.example.myapplication.MESSAGE";
     private static final String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
+    protected Location mapLastLocation;
+    private Maps.AddressResultReceiver mapResultReceiver;
 
-    String[] arr = {"Zombie", "About", "Traffic Cameras", "stapphhhh"};
+    String[] arr = {"Zombie", "About", "Traffic Cameras", "Maps"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,11 +103,19 @@ public class MainActivity extends AppCompatActivity {
                             case R.id.nav_about:
                                 intent = new Intent(MainActivity.this, About.class);
                                 startActivity(intent);
+
                         }
 
                         return true;
                     }
                 });
+    }
+
+    protected void startIntentService(){
+        Intent intent = new Intent(this, FetchAddressIntentService.class);
+        intent.putExtra(Constants.RECEIVER, mapResultReceiver);
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA, mapLastLocation);
+        startService(intent);
     }
 
 
@@ -116,6 +134,21 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
     }
 
     public class ButtonAdapter extends BaseAdapter {

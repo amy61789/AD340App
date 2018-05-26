@@ -1,8 +1,10 @@
 package com.example.amyfunk.ad340app;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,7 +34,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class Maps extends AppCompatActivity implements OnMapReadyCallback, LocationListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private FusedLocationProviderClient mapFusedLocationClient;
     private LocationCallback mapLocationCallback;
@@ -95,7 +97,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapLocationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
-                Log.d("LOCATION","onLocationResult");
+                Log.d("LOCATION", "onLocationResult");
                 if (locationResult == null) {
                     return;
                 }
@@ -103,24 +105,27 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     mapLastLocation = location;
                     updateUI();
                 }
-            };
+            }
+
+            ;
         };
     }
 
 
     @Override
-    public void onConnected(Bundle connectionHint) {}
+    public void onConnected(Bundle connectionHint) {
+    }
 
     public void getLocation() {
-        Log.d("LOCATION","getLocation");
+        Log.d("LOCATION", "getLocation");
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                ==PackageManager.PERMISSION_GRANTED){
-            Log.d("LOCATION","permissionGranted");
+                == PackageManager.PERMISSION_GRANTED) {
+            Log.d("LOCATION", "permissionGranted");
             mapFusedLocationClient.getLastLocation()
                     .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
-                            Log.d("LOCATION","gotLocation");
+                            Log.d("LOCATION", "gotLocation");
 
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
@@ -131,7 +136,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         }
                     });
         } else {
-            Log.d("LOCATION","permissionNotGranted");
+            Log.d("LOCATION", "permissionNotGranted");
             // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
@@ -143,7 +148,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             } else {
 
                 // No explanation needed, we can request the permission.
-                Log.d("LOCATION","requestPermission");
+                Log.d("LOCATION", "requestPermission");
 
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -157,7 +162,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        Log.d("LOCATION","onRequestPermissionsResult");
+        Log.d("LOCATION", "onRequestPermissionsResult");
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -181,7 +186,32 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         // store map object for use once location is available
         mapMap = googleMap;
-        Log.d("LOCATION","onMapReady");
+        Log.d("LOCATION", "onMapReady");
+    }
+
+    @SuppressLint("MissingPermission")
+    private void fetchAddressButtonHandler(View view) {
+
+        mapFusedLocationClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        mapLastLocation = location;
+
+                        if (mapLastLocation == null) {
+                            return;
+                        }
+
+                        if (!Geocoder.isPresent()) {
+                            Toast.makeText(Maps.this,
+                                    R.string.no_geocoder_available,
+                                    Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        startIntentService();
+                        updateUI();
+                    }
+                });
     }
 
 
