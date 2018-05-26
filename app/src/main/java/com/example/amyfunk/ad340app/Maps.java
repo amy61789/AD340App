@@ -189,31 +189,6 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback, Locat
         Log.d("LOCATION", "onMapReady");
     }
 
-    @SuppressLint("MissingPermission")
-    private void fetchAddressButtonHandler(View view) {
-
-        mapFusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        mapLastLocation = location;
-
-                        if (mapLastLocation == null) {
-                            return;
-                        }
-
-                        if (!Geocoder.isPresent()) {
-                            Toast.makeText(Maps.this,
-                                    R.string.no_geocoder_available,
-                                    Toast.LENGTH_LONG).show();
-                            return;
-                        }
-                        startIntentService();
-                        updateUI();
-                    }
-                });
-    }
-
 
     public void updateUI() {
         if (mapLastLocation == null) {
@@ -224,7 +199,6 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback, Locat
 
             // initiate geocode request
             if (mapAddressRequested) {
-                startIntentService();
             }
 
             mapLatitudeText.setText(String.valueOf(mapLastLocation.getLatitude()));
@@ -267,16 +241,6 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback, Locat
         updateUI();
     }
 
-    /**
-     * Creates an intent, adds location data to it as an extra, and starts the intent service for
-     * fetching an address.
-     */
-    protected void startIntentService() {
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(Constants.RECEIVER, mapAddressReceiver);
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, mapLastLocation);
-        startService(intent);
-    }
 
     /**
      * Receiver for data sent from FetchAddressIntentService.

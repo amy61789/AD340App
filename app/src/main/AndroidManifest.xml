@@ -27,10 +27,10 @@
         <activity android:name=".DetailActivity"/>
         <activity android:name=".Cameras"/>
         <activity android:name=".Maps"/>
+        <meta-data
+            android:name="com.google.android.geo.AIzaSyCvi0B8T2zhBmIu4RGlBndQ-Mxi8BL95ts"
+            android:value="AIzaSyCvi0B8T2zhBmIu4RGlBndQ-Mxi8BL95ts"/>
 
-        <service
-            android:name=".FetchAddressIntentService"
-            android:exported="false"/>
     </application>
 
 </manifest>

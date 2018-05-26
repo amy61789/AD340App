@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private static final String TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawerLayout;
     protected Location mapLastLocation;
-    private Maps.AddressResultReceiver mapResultReceiver;
+
 
     String[] arr = {"Zombie", "About", "Traffic Cameras", "Maps"};
 
@@ -110,14 +110,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     }
                 });
     }
-
-    protected void startIntentService(){
-        Intent intent = new Intent(this, FetchAddressIntentService.class);
-        intent.putExtra(Constants.RECEIVER, mapResultReceiver);
-        intent.putExtra(Constants.LOCATION_DATA_EXTRA, mapLastLocation);
-        startService(intent);
-    }
-
 
     public void sendMessage(View view) {
 
@@ -228,6 +220,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     break;
                 case 2:
                     intent = new Intent(getBaseContext(), Cameras.class);
+                    startActivity(intent);
+                    break;
+                case 3:
+                    intent = new Intent(getBaseContext(), Maps.class);
                     startActivity(intent);
                     break;
                 default:
