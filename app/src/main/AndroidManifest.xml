@@ -28,8 +28,11 @@
         <activity android:name=".Cameras"/>
         <activity android:name=".Maps"/>
         <meta-data
-            android:name="com.google.android.geo.AIzaSyCvi0B8T2zhBmIu4RGlBndQ-Mxi8BL95ts"
-            android:value="AIzaSyCvi0B8T2zhBmIu4RGlBndQ-Mxi8BL95ts"/>
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAFfTqeS3mLwVb1Azz4gRGXez1nd2bXZqs"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
     </application>
 
