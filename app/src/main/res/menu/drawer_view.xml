@@ -6,6 +6,14 @@
             android:icon="@drawable/ic_local_pizza_black_24dp"
             android:title="@string/about" />
         <item
+            android:id="@+id/nav_map"
+            android:icon="@drawable/ic_local_pizza_black_24dp"
+            android:title="@string/title_activity_map" />
+        <item
+            android:id="@+id/nav_map_cams"
+            android:icon="@drawable/ic_local_pizza_black_24dp"
+            android:title="@string/title_activity_traffic_cam_map" />
+        <item
             android:id="@+id/nav_movies"
             android:icon="@drawable/ic_movie_black_24dp"
             android:title="@string/movies" />

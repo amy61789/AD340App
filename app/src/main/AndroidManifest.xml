@@ -21,12 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <service
+            android:name=".FetchAddressIntentService"
+            android:exported="false" />
         <activity android:name=".RecyclerActivity"/>
         <activity android:name=".Detail"/>
         <activity android:name=".About"/>
         <activity android:name=".DetailActivity"/>
         <activity android:name=".Cameras"/>
         <activity android:name=".Maps"/>
+        <activity android:name=".TrafficCamMap"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAFfTqeS3mLwVb1Azz4gRGXez1nd2bXZqs"/>

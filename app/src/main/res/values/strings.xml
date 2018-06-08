@@ -21,4 +21,6 @@
     <string name="address_found">Address found</string>
     <string name="no_address_found">No address found</string>
     <string name="invalid_lat_long_used">Invalid Lat/Long</string>
+    <string name="title_activity_map">title_activity_map</string>
+    <string name="title_activity_traffic_cam_map">title_activity_traffic_cam_map</string>
 </resources>

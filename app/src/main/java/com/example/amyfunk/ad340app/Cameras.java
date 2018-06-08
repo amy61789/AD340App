@@ -144,7 +144,7 @@ public class Cameras extends AppCompatActivity {
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
             holder.cName.setText(cameraList.get(position).getDescription());
-            String url = baseUrls.get(cameraList.get(position).getType()) + cameraList.get(position).getImageUrl();
+            String url = baseUrls.get(cameraList.get(position).getType()) + cameraList.get(position).imageUrl();
             Picasso.get().load(url).into(holder.cImage);
         }
 
