@@ -10,4 +10,12 @@ class TrafficCam(val description: String, val image: String, var type: String, v
     fun imageUrl() : String {
         return baseUrl[this.type] + this.image
     }
+
+    fun coords() : DoubleArray {
+        return coords
+    }
+
+    fun getDesc() : String {
+        return description
+    }
 }

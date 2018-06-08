@@ -206,17 +206,23 @@ public class TrafficCamMap extends AppCompatActivity implements
         mMap = googleMap;
         mMap.setInfoWindowAdapter(new CameraInfoWindow(this));
         LatLngBounds.Builder mBound = new LatLngBounds.Builder();
-        LatLng mLatLng = new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+        LatLng mLatLng = new LatLng(cameraList.get(0).coords()[0], cameraList.get(0).coords()[1]);
         mBound.include(mLatLng);
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(mBound.build(), 12));
-
+        for(int i = 0; i < cameraList.size(); i++){
+            mMap.addMarker(new MarkerOptions()
+                .position(new LatLng(cameraList.get(i).coords()[0],cameraList.get(i).coords()[1]))
+                .title(cameraList.get(i).getDesc())
+                .snippet(cameraList.get(i).imageUrl())
+            );
+        }
     }
 
     /**
      * Loads camera data
      */
     public void loadCameraData() {
-        String dataUrl = " https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
+        String dataUrl = "https://web6.seattle.gov/Travelers/api/Map/Data?zoomId=13&type=2";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonReq = new JsonObjectRequest
                 (Request.Method.GET, dataUrl, null, new Response.Listener<JSONObject>() {
