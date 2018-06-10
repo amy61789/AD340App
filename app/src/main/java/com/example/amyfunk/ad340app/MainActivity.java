@@ -223,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
                     startActivity(intent);
                     break;
                 case 3:
-                    intent = new Intent(getBaseContext(), Maps.class);
+                    intent = new Intent(getBaseContext(), TrafficCamMap.class);
                     startActivity(intent);
                     break;
                 default:

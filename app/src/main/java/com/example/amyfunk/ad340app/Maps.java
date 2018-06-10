@@ -210,6 +210,8 @@ public class Maps extends AppCompatActivity implements OnMapReadyCallback, Locat
             mapMap.addMarker(new MarkerOptions().position(myLocation)
                     .title("My current location"));
             mapMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+            TrafficCamMap trafficCamMap = new TrafficCamMap();
+            trafficCamMap.onMapReady(mapMap);
         }
     }
 
